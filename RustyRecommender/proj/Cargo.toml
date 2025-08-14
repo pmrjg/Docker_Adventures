@@ -1,0 +1,9 @@
+[package]
+name = "RustyRecommender"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+candle-core = { git = "https://github.com/huggingface/candle.git", version = "0.9.1", features = ["accelerate", "cuda", "cudnn", "mkl"] }
+candle-nn = { git = "https://github.com/huggingface/candle.git", version = "0.9.1", features = ["accelerate", "cuda", "cudnn", "mkl"] }
+serde = { version = "1.0.219", features = ["derive"] }
