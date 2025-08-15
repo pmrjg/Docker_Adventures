@@ -23,7 +23,8 @@ RUN rm -rf /tmp/miniconda.sh
 
 RUN conda tos accept
 
-RUN conda create -n cenv python=3.10 -y
+RUN conda create -n pt python=3.13 -y
+RUN conda create -n jax python=3.13 -y
 
 ADD install.sh /install.sh
 
@@ -31,7 +32,7 @@ RUN chmod +x /install.sh
 
 RUN /install.sh
 
-RUN conda run -n cenv jupyter lab --generate-config
+RUN conda run -n pt jupyter lab --generate-config
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
