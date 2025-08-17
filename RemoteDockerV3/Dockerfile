@@ -1,37 +1,12 @@
-FROM ubuntu:latest AS ubuntu
+FROM nvidia/cuda:13.0.0-cudnn-runtime-ubuntu24.04 AS ubuntu
 LABEL authors="pmrjge"
 
 WORKDIR /workspace
 USER root
 
-ENV CONDA_DIR=/miniconda3
-
 RUN apt-get update && apt-get install apt-utils && apt-get install -y git wget curl openssh-server gcc g++ build-essential cmake clang && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
-
-RUN bash /tmp/miniconda.sh -b -p $CONDA_DIR
-
-ENV PATH="$CONDA_DIR/bin:$PATH"
-
-RUN $CONDA_DIR/bin/conda init bash
-
-SHELL ["/bin/bash", "-i", "-c"]
-
-RUN rm -rf /tmp/miniconda.sh
-
-RUN conda tos accept
-
-RUN conda create -n gen python=3.13 -y
-
-ADD install.sh /install.sh
-
-RUN chmod +x /install.sh
-
-RUN /install.sh
-
-SHELL ["conda", "run", "-n", "gen", "/bin/bash", "-c"]
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
