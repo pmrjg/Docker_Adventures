@@ -1,4 +1,4 @@
-FROM ubuntu:latest AS ubuntu
+FROM nvidia/cuda:13.0.0-tensorrt-runtime-ubuntu24.04 AS ubuntu
 LABEL authors="pmrjge"
 
 WORKDIR /workspace
