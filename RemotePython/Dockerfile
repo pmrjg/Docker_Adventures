@@ -9,6 +9,10 @@ ENV CONDA_DIR=/miniconda3
 RUN apt-get update && apt-get install apt-utils && apt-get install -y git wget curl nginx openssh-server gcc g++ build-essential cmake clang && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN git config --global user.name "Pedro Jorge"
+RUN git config --global user.email pmrjge@gmail.com
+RUN git config --global init.defaultBranch main
+
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
 
 RUN bash /tmp/miniconda.sh -b -p $CONDA_DIR
